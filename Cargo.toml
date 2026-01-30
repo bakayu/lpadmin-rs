@@ -1,0 +1,11 @@
+[package]
+name = "lpadmin-rs"
+version = "0.1.0"
+edition = "2024"
+description = "An experimental Rust implementation of lpadmin CLI tool to configure cups printers and classes."
+readme = "README.md"
+
+[dependencies]
+clap = { version = "4", features = ["derive"] }
+cups_rs = "0.3.0"
+env = "1"

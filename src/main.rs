@@ -5,8 +5,7 @@ mod options;
 
 use crate::cli::Args;
 use clap::Parser;
-use cups_rs::bindings::cupsSetUser;
-use cups_rs::config::{EncryptionMode, set_encryption, set_server};
+use cups_rs::config::{EncryptionMode, set_encryption, set_server, set_user};
 
 fn main() -> Result<(), Box<dyn std::error::Error>> {
     let args = Args::parse();
@@ -18,8 +17,7 @@ fn main() -> Result<(), Box<dyn std::error::Error>> {
 
     // -U: set user
     if let Some(username) = &args.username {
-        let user = std::ffi::CString::new(username.as_str())?;
-        unsafe { cupsSetUser(user.as_ptr()) };
+        set_user(Some(&username))?;
     }
 
     // -E: if `-p`` present enable printer, otherwise require encryption
